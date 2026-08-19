@@ -1,8 +1,8 @@
 // QUICK EDIT: change all three links here.
 function getProjectLinks() {
   return {
-    contractAddress: "PASTE_CA_HERE",
-    pumpFun: "https://pump.fun/coin/PASTE_CA_HERE",
+    contractAddress: "contract address",
+    pumpFun: "https://pump.fun/coin/",
     twitter: "https://x.com/PASTE_USERNAME_HERE"
   };
 }
@@ -16,6 +16,40 @@ const links = getProjectLinks();
 document.querySelector("#pump-link").href = links.pumpFun;
 document.querySelector("#twitter-link").href = links.twitter;
 
+// Background music
+const backgroundMusic = new Audio("assets/music.mp3");
+
+backgroundMusic.loop = true;
+backgroundMusic.volume = 0.35;
+backgroundMusic.preload = "auto";
+
+let musicStarted = false;
+
+async function startMusic() {
+  if (musicStarted) return;
+
+  try {
+    await backgroundMusic.play();
+    musicStarted = true;
+  } catch (error) {
+    console.log("Music is waiting for user interaction.");
+  }
+}
+
+const musicEvents = [
+  "pointerdown",
+  "touchstart",
+  "keydown",
+  "wheel"
+];
+
+musicEvents.forEach((eventName) => {
+  window.addEventListener(eventName, startMusic, {
+    passive: true
+  });
+});
+
+// Copy contract address
 const copyButton = document.querySelector("#copy-ca");
 
 copyButton.onclick = async () => {
@@ -84,7 +118,10 @@ const renderer = new THREE.WebGLRenderer({
   antialias: true
 });
 
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setPixelRatio(
+  Math.min(window.devicePixelRatio, 2)
+);
+
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 // Camera controls
@@ -92,13 +129,13 @@ const controls = new OrbitControls(camera, canvas);
 
 controls.enableDamping = true;
 controls.enablePan = false;
+
 controls.minDistance = 4;
 controls.maxDistance = 12;
 
 controls.autoRotate = true;
 controls.autoRotateSpeed = 15;
 
-// The pivot is centered, so the camera should look at zero
 controls.target.set(0, 0, 0);
 
 // Lights
@@ -139,7 +176,7 @@ let model = null;
 let chaos = 0;
 let baseScale = 1;
 
-// Adjust these two values
+// Model adjustments
 const MODEL_SIZE = 3.8;
 const MODEL_HEIGHT = 0;
 
@@ -151,19 +188,19 @@ loader.load(
   (gltf) => {
     const character = gltf.scene;
 
-    // Calculate the real center of the model
+    // Calculate model dimensions
     const box = new THREE.Box3().setFromObject(character);
     const size = box.getSize(new THREE.Vector3());
     const center = box.getCenter(new THREE.Vector3());
 
-    // Move the character's center to 0,0,0
+    // Put the true center at 0,0,0
     character.position.set(
       -center.x,
       -center.y,
       -center.z
     );
 
-    // Create a central pivot
+    // Central rotation pivot
     const pivot = new THREE.Group();
 
     pivot.add(character);
@@ -179,7 +216,6 @@ loader.load(
       if (child.isMesh) {
         child.material = child.material.clone();
 
-        // Keeps the low-poly look
         child.material.flatShading = true;
         child.material.needsUpdate = true;
 
@@ -189,9 +225,11 @@ loader.load(
     });
 
     model = pivot;
+
     scene.add(pivot);
 
-    const loadingText = document.querySelector("#loading");
+    const loadingText =
+      document.querySelector("#loading");
 
     if (loadingText) {
       loadingText.remove();
@@ -205,18 +243,25 @@ loader.load(
       (progress.loaded / progress.total) * 100
     );
 
-    const loadingText = document.querySelector("#loading");
+    const loadingText =
+      document.querySelector("#loading");
 
     if (loadingText) {
-      loadingText.textContent = `DIALING... ${percentage}%`;
+      loadingText.textContent =
+        `DIALING... ${percentage}%`;
     }
   },
 
   (error) => {
     console.error("GLB loading error:", error);
 
-    document.querySelector("#loading").textContent =
-      "coldcaller.glb NOT FOUND";
+    const loadingText =
+      document.querySelector("#loading");
+
+    if (loadingText) {
+      loadingText.textContent =
+        "coldcaller.glb NOT FOUND";
+    }
   }
 );
 
@@ -247,7 +292,10 @@ function resizeRenderer() {
   camera.updateProjectionMatrix();
 }
 
-window.addEventListener("resize", resizeRenderer);
+window.addEventListener(
+  "resize",
+  resizeRenderer
+);
 
 resizeRenderer();
 
@@ -268,16 +316,25 @@ function animate() {
       Math.sin(time * 27) * chaos * 0.25;
 
     model.scale.set(
-      baseScale * (1 + Math.sin(time * 18) * chaos * 0.35),
-      baseScale * (1 + Math.cos(time * 23) * chaos * 0.25),
+      baseScale *
+        (1 + Math.sin(time * 18) * chaos * 0.35),
+
+      baseScale *
+        (1 + Math.cos(time * 23) * chaos * 0.25),
+
       baseScale
     );
   }
 
-  controls.autoRotateSpeed = 15 + chaos * 45;
+  controls.autoRotateSpeed =
+    15 + chaos * 45;
 
   controls.update();
-  renderer.render(scene, camera);
+
+  renderer.render(
+    scene,
+    camera
+  );
 
   requestAnimationFrame(animate);
 }
