@@ -24,6 +24,7 @@ backgroundMusic.volume = 0.35;
 backgroundMusic.preload = "auto";
 
 let musicStarted = false;
+const musicToggle = document.querySelector("#music-toggle");
 
 async function startMusic() {
   if (musicStarted) return;
@@ -35,6 +36,22 @@ async function startMusic() {
     console.log("Music is waiting for user interaction.");
   }
 }
+
+musicToggle.addEventListener("click", async () => {
+  if (backgroundMusic.paused) {
+    try {
+      await backgroundMusic.play();
+      musicStarted = true;
+      musicToggle.textContent = "[ MUSIC: ON ]";
+    } catch (error) {
+      console.log("Music is waiting for user interaction.");
+    }
+  } else {
+    backgroundMusic.pause();
+    musicStarted = true;
+    musicToggle.textContent = "[ MUSIC: OFF ]";
+  }
+});
 
 const musicEvents = [
   "pointerdown",
