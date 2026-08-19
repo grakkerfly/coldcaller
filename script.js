@@ -3,7 +3,7 @@ function getProjectLinks() {
   return {
     contractAddress: "contract address",
     pumpFun: "https://pump.fun/coin/",
-    twitter: "https://x.com/PASTE_USERNAME_HERE"
+    twitter: "https://x.com/the_coldestcall"
   };
 }
 
