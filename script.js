@@ -1,8 +1,8 @@
 // QUICK EDIT: change all three links here.
 function getProjectLinks() {
   return {
-    contractAddress: "contract address",
-    pumpFun: "https://pump.fun/coin/",
+    contractAddress: "7b9sxQXePP3K1jkdtGNGtWK59YUz3vXLFr2bHC3Kpump",
+    pumpFun: "https://pump.fun/coin/7b9sxQXePP3K1jkdtGNGtWK59YUz3vXLFr2bHC3Kpump",
     twitter: "https://x.com/the_coldestcall"
   };
 }
