@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#06130f">
+  <meta name="description" content="Cold Caller — freezing assets across the Solana corporate ladder.">
+  <title>COLD CALLER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}
+  </script>
+</head>
+<body>
+  <div class="noise"></div><div class="cursor-glow"></div>
+  <div class="ticker" aria-hidden="true"><div>INCOMING CALL // DO NOT ANSWER // FREEZE ASSETS // NO ALPHA // YOUR FAVORITE CALLER SOLD //&nbsp;</div></div>
+  <header>
+    <a class="logo" href="#top"><span class="status"></span>COLD CALLER</a>
+    <nav><a href="#lore">LORE</a><a href="#memes">MEMES</a></nav>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">SELLBOT // LEVEL 01–05</p>
+        <h1 data-text="COLD CALLER">COLD<br>CALLER</h1>
+        <p class="sub">THE LOWEST COG ON THE LADDER.<br>STILL ABOVE YOUR FAVORITE KOL.</p>
+        <div class="actions">
+          <button class="btn primary" id="copy-ca" type="button">COPY CA</button>
+          <a class="btn" id="pump-link" href="#" target="_blank" rel="noopener">PUMP.FUN ↗</a>
+          <a class="btn" id="twitter-link" href="#" target="_blank" rel="noopener">TWITTER ↗</a>
+        </div>
+      </div>
+      <div class="model-shell">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <canvas id="model-canvas" aria-label="Interactive 3D Cold Caller model"></canvas>
+        <div class="loading" id="loading">CONNECTING CALL...</div>
+        <div class="model-ui"><span>DRAG TO DISTURB</span><span id="signal">SIGNAL: 100%</span></div>
+        <button class="freeze" id="freeze-button" type="button">FREEZE ASSETS</button>
+      </div>
+    </section>
+
+    <section class="lore" id="lore">
+      <div class="section-tag">01 / INTERNAL MEMO</div>
+      <div class="lore-grid">
+        <h2>HE CALLS.<br>YOU HOLD.<br>HE SELLS.</h2>
+        <div class="memo">
+          <p>Cold Caller is the bottom rung of the Sellbot corporate ladder. Levels one through five. Zero conviction.</p>
+          <p>On Solana, the ladder changed. The script didn’t. They call the ticker, freeze your assets, and move to the next room.</p>
+          <div class="move-card"><span>SIGNATURE MOVE</span><strong>FREEZE ASSETS</strong><small>ACCURACY: 90% // DAMAGE: EMOTIONAL</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery" id="memes">
+      <div class="gallery-head"><div class="section-tag">02 / EVIDENCE ARCHIVE</div><h2>CALL LOGS</h2></div>
+      <div class="meme-grid" id="meme-grid"></div>
+    </section>
+  </main>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Meme preview"><button id="modal-close" aria-label="Close preview">×</button><img id="modal-image" alt="Cold Caller meme"></div>
+  <footer><span>© COLD CALLER INC.</span><span>THIS CALL MAY BE RECORDED.</span><span>NO REFUNDS.</span></footer>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
